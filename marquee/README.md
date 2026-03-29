@@ -38,7 +38,7 @@ You have **two options**.
 #### Option A — Use the hosted CSS file
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.1/marquee/remenex-marquee.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.2/marquee/remenex-marquee.css">
 ```
 
 #### Option B — Write the CSS manually
@@ -75,7 +75,7 @@ If you prefer not to load the hosted CSS file, use this:
 ### 3. Add Remenex Marquee JS
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.1/marquee/remenex-marquee.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.2/marquee/remenex-marquee.js"></script>
 ```
 
 ---
@@ -91,7 +91,7 @@ In Webflow, go to:
 Then add either:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.1/marquee/remenex-marquee.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.2/marquee/remenex-marquee.css">
 ```
 
 or your own manual CSS.
@@ -107,7 +107,7 @@ Then add:
 ```html
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.1/marquee/remenex-marquee.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.2/marquee/remenex-marquee.js"></script>
 ```
 
 You can also place these in **Page Settings** instead if you only want the marquee on a specific page.

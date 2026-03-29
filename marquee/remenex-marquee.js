@@ -65,7 +65,7 @@
     } flex: 0 0 auto;"></div>`;
 
     for (let i = 0; i < duplicateCount; i++) {
-      finalHTML += spacer + originalHTML;
+      finalHTML += spacer + originalHTML + spacer;
     }
 
     container.innerHTML = finalHTML;
