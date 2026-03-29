@@ -51,7 +51,7 @@
     return prefersReduced ? mode : false;
   }
 
-  function duplicateSlides(container, duplicateCount, axis = 'x') {
+ function duplicateSlides(container, duplicateCount, axis = 'x') {
     const originalSlides = Array.from(container.children);
     const styles = window.getComputedStyle(container);
     const gap = parseFloat(styles.gap) || 0;
@@ -60,20 +60,24 @@
 
     const originalHTML = container.innerHTML;
 
+    container.style.gap = '0px';
+
+    function applySpacing(slide) {
+      if (axis === 'y') {
+        slide.style.marginBottom = `${gap}px`;
+        slide.style.marginRight = '';
+      } else {
+        slide.style.marginRight = `${gap}px`;
+        slide.style.marginBottom = '';
+      }
+    }
+
     container.innerHTML = '';
 
     function appendSet() {
-      originalSlides.forEach((slide, index) => {
+      originalSlides.forEach((slide) => {
         const clone = slide.cloneNode(true);
-
-        if (index === originalSlides.length - 1 && gap > 0) {
-          if (axis === 'y') {
-            clone.style.marginBottom = `${gap}px`;
-          } else {
-            clone.style.marginRight = `${gap}px`;
-          }
-        }
-
+        applySpacing(clone);
         container.appendChild(clone);
       });
     }
