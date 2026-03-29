@@ -1,47 +1,49 @@
 # Remenex Marquee
 
-**Remenex Marquee** is a lightweight, reusable infinite marquee (continuous scrolling) component for Webflow projects, powered by Embla Carousel.
+**Remenex Marquee** is a lightweight, reusable infinite marquee component for Webflow projects, powered by Embla Carousel.
 
-It provides **smooth, seamless, linear scrolling** without snapping or easing, fully controlled via custom HTML attributes.
+It creates **smooth, continuous, linear scrolling** without snapping or easing, and is fully controlled through custom HTML attributes.
 
 ---
 
-## ✨ Features
+## Features
 
-* Infinite loop (continuous scrolling)
-* Ultra smooth movement (no easing / no snapping)
-* Horizontal & vertical support
+* Infinite continuous scroll
+* Smooth marquee-style movement
+* Horizontal and vertical support
 * Reverse direction
 * Pause on hover
 * Pause on interaction
-* Responsive disable (breakpoint support)
-* Reduced motion support (accessibility)
+* Breakpoint-based disable
+* Reduced motion support
 * Automatic content duplication
-* Multiple instances per page
-* JavaScript API control
+* Multiple marquees on the same page
+* JavaScript API support
 
 ---
 
-## 📦 Installation
+## Installation
 
-### 1. Include Embla + Auto Scroll plugin
+### 1. Add the required Embla libraries
 
 ```html
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
 ```
 
----
+### 2. Add Remenex Marquee CSS
 
-### 2. Include Remenex Marquee
+You have **two options**.
+
+#### Option A — Use the hosted CSS file
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/YOUR-USERNAME/remenex-scripts@1.0.0/marquee/remenex-marquee.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.0/marquee/remenex-marquee.css">
 ```
 
----
+#### Option B — Write the CSS manually
 
-### 3. Add CSS
+If you prefer not to load the hosted CSS file, use this:
 
 ```css
 [remenex-marquee] {
@@ -70,9 +72,49 @@ It provides **smooth, seamless, linear scrolling** without snapping or easing, f
 }
 ```
 
+### 3. Add Remenex Marquee JS
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.0/marquee/remenex-marquee.js"></script>
+```
+
 ---
 
-## 🧩 HTML Structure
+## Webflow Setup
+
+### Add CSS in the Head
+
+In Webflow, go to:
+
+**Site Settings → Custom Code → Inside `<head>`**
+
+Then add either:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.0/marquee/remenex-marquee.css">
+```
+
+or your own manual CSS.
+
+### Add Scripts Before `</body>`
+
+In Webflow, go to:
+
+**Site Settings → Custom Code → Before `</body>`**
+
+Then add:
+
+```html
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.0/marquee/remenex-marquee.js"></script>
+```
+
+You can also place these in **Page Settings** instead if you only want the marquee on a specific page.
+
+---
+
+## HTML Structure
 
 ```html
 <div remenex-marquee>
@@ -88,98 +130,114 @@ It provides **smooth, seamless, linear scrolling** without snapping or easing, f
 
 ---
 
-## ⚙️ Options (Custom Attributes)
+## Options
 
-All options are configured via **custom HTML attributes** in Webflow.
-
----
+All options are controlled through custom HTML attributes.
 
 ### Core Options
 
-| Attribute           | Type    | Default    | Description                |
-| ------------------- | ------- | ---------- | -------------------------- |
-| `remenex-speed`     | number  | 1          | Scroll speed               |
-| `remenex-gap`       | number  | 48         | Space between slides (px)  |
-| `remenex-direction` | string  | horizontal | `horizontal` or `vertical` |
-| `remenex-reverse`   | boolean | false      | Reverse direction          |
-
----
+| Attribute           | Type    | Default      | Description                |
+| ------------------- | ------- | ------------ | -------------------------- |
+| `remenex-speed`     | number  | `1`          | Scroll speed               |
+| `remenex-gap`       | number  | `48`         | Space between slides in px |
+| `remenex-direction` | string  | `horizontal` | `horizontal` or `vertical` |
+| `remenex-reverse`   | boolean | `false`      | Reverses scroll direction  |
 
 ### Behavior
 
-| Attribute           | Type    | Default | Description              |
-| ------------------- | ------- | ------- | ------------------------ |
-| `remenex-loop`      | boolean | true    | Infinite loop            |
-| `remenex-drag`      | boolean | false   | Enable dragging          |
-| `remenex-drag-free` | boolean | true    | Momentum scrolling       |
-| `remenex-align`     | string  | start   | `start`, `center`, `end` |
-| `remenex-dir`       | string  | ltr     | `ltr` or `rtl`           |
-
----
+| Attribute           | Type    | Default | Description                     |
+| ------------------- | ------- | ------- | ------------------------------- |
+| `remenex-loop`      | boolean | `true`  | Enables infinite loop           |
+| `remenex-drag`      | boolean | `false` | Enables dragging                |
+| `remenex-drag-free` | boolean | `true`  | Enables momentum-style dragging |
+| `remenex-align`     | string  | `start` | `start`, `center`, or `end`     |
+| `remenex-dir`       | string  | `ltr`   | `ltr` or `rtl`                  |
 
 ### Interaction
 
-| Attribute                      | Type    | Default | Description         |
-| ------------------------------ | ------- | ------- | ------------------- |
-| `remenex-pause-on-hover`       | boolean | false   | Pause on hover      |
-| `remenex-pause-on-interaction` | boolean | true    | Pause on click/drag |
-
----
+| Attribute                      | Type    | Default | Description             |
+| ------------------------------ | ------- | ------- | ----------------------- |
+| `remenex-pause-on-hover`       | boolean | `false` | Pauses on hover         |
+| `remenex-pause-on-interaction` | boolean | `true`  | Pauses on click or drag |
 
 ### Advanced
 
-| Attribute                    | Type    | Default | Description                    |
-| ---------------------------- | ------- | ------- | ------------------------------ |
-| `remenex-start-delay`        | number  | 0       | Delay before start             |
-| `remenex-duplicate`          | number  | 1       | Number of content duplications |
-| `remenex-breakpoint-disable` | number  | null    | Disable below screen width     |
-| `remenex-active`             | boolean | true    | Enable/disable component       |
-
----
+| Attribute                    | Type    | Default | Description                           |
+| ---------------------------- | ------- | ------- | ------------------------------------- |
+| `remenex-start-delay`        | number  | `0`     | Delay before auto-scroll starts       |
+| `remenex-duplicate`          | number  | `1`     | Number of extra content duplications  |
+| `remenex-breakpoint-disable` | number  | `null`  | Disables marquee below a screen width |
+| `remenex-active`             | boolean | `true`  | Enables or disables the component     |
 
 ### Accessibility
 
 | Attribute                | Type   | Default | Description          |
 | ------------------------ | ------ | ------- | -------------------- |
-| `remenex-reduced-motion` | string | pause   | `pause` or `disable` |
+| `remenex-reduced-motion` | string | `pause` | `pause` or `disable` |
 
 ---
 
-## 🔧 Examples
+## Examples
 
 ### Basic marquee
 
 ```html
 <div remenex-marquee remenex-speed="1">
+  <div remenex-viewport>
+    <div remenex-container>
+      <div remenex-slide>Logo 1</div>
+      <div remenex-slide>Logo 2</div>
+      <div remenex-slide>Logo 3</div>
+    </div>
+  </div>
+</div>
 ```
-
----
 
 ### Vertical marquee
 
 ```html
-<div remenex-marquee remenex-direction="vertical">
+<div remenex-marquee remenex-direction="vertical" remenex-speed="0.8">
+  <div remenex-viewport>
+    <div remenex-container>
+      <div remenex-slide>Card 1</div>
+      <div remenex-slide>Card 2</div>
+      <div remenex-slide>Card 3</div>
+    </div>
+  </div>
+</div>
 ```
 
----
-
-### Reverse + hover pause
+### Reverse direction with hover pause
 
 ```html
-<div remenex-marquee remenex-reverse remenex-pause-on-hover>
+<div remenex-marquee remenex-reverse="true" remenex-pause-on-hover="true">
+  <div remenex-viewport>
+    <div remenex-container>
+      <div remenex-slide>Item 1</div>
+      <div remenex-slide>Item 2</div>
+      <div remenex-slide>Item 3</div>
+    </div>
+  </div>
+</div>
 ```
-
----
 
 ### Disable on mobile
 
 ```html
 <div remenex-marquee remenex-breakpoint-disable="767">
+  <div remenex-viewport>
+    <div remenex-container>
+      <div remenex-slide>Item 1</div>
+      <div remenex-slide>Item 2</div>
+      <div remenex-slide>Item 3</div>
+    </div>
+  </div>
+</div>
 ```
 
 ---
 
-## 🧠 JavaScript API
+## JavaScript API
 
 ```js
 const marquee = RemenexMarquee.get('[remenex-marquee]');
@@ -194,7 +252,7 @@ marquee.destroy();
 
 ---
 
-## ⚡ Recommended Setup
+## Recommended Setup
 
 ```html
 <div
@@ -204,26 +262,33 @@ marquee.destroy();
   remenex-pause-on-hover="true"
   remenex-duplicate="2"
 >
+  <div remenex-viewport>
+    <div remenex-container>
+      <div remenex-slide>Item 1</div>
+      <div remenex-slide>Item 2</div>
+      <div remenex-slide>Item 3</div>
+    </div>
+  </div>
+</div>
 ```
 
 ---
 
-## 🚀 Roadmap
+## Notes
 
-* Edge fade (mask effect)
-* Multi-row sync support
-* CMS auto-detection
-* Lazy initialization (Intersection Observer)
-* Advanced interaction controls
+* Add the CSS in the page or site `<head>`
+* Add the script tags before `</body>`
+* Make sure Embla is loaded before `remenex-marquee.js`
+* If you update the script in the future, publish a new version and update the CDN version number
 
 ---
 
-## 🏷️ License
+## License
 
 MIT © Remenex
 
 ---
 
-## 👤 Author
+## Author
 
 Built by **Remenex** for scalable Webflow development.
