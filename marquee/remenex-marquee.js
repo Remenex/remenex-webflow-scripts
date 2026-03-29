@@ -52,34 +52,37 @@
   }
 
   function duplicateSlides(container, duplicateCount, axis = 'x') {
-    const originalChildren = Array.from(container.children);
+    const originalSlides = Array.from(container.children);
     const styles = window.getComputedStyle(container);
     const gap = parseFloat(styles.gap) || 0;
 
+    if (!originalSlides.length) return '';
+
+    const originalHTML = container.innerHTML;
+
     container.innerHTML = '';
 
-    for (let i = 0; i < duplicateCount + 1; i++) {
-      const group = document.createElement('div');
-      group.setAttribute('remenex-group', '');
-      group.style.display = 'flex';
-      group.style.flexDirection = axis === 'y' ? 'column' : 'row';
-      group.style.flex = '0 0 auto';
-      group.style.gap = `${gap}px`;
+    function appendSet() {
+      originalSlides.forEach((slide, index) => {
+        const clone = slide.cloneNode(true);
 
-      if (axis === 'y') {
-        group.style.marginBottom = `${gap}px`;
-      } else {
-        group.style.marginRight = `${gap}px`;
-      }
+        if (index === originalSlides.length - 1 && gap > 0) {
+          if (axis === 'y') {
+            clone.style.marginBottom = `${gap}px`;
+          } else {
+            clone.style.marginRight = `${gap}px`;
+          }
+        }
 
-      originalChildren.forEach((child) => {
-        group.appendChild(child.cloneNode(true));
+        container.appendChild(clone);
       });
-
-      container.appendChild(group);
     }
 
-    return originalChildren.map((child) => child.outerHTML).join('');
+    for (let i = 0; i < duplicateCount + 1; i++) {
+      appendSet();
+    }
+
+    return originalHTML;
   }
 
   function buildOptions(root) {
