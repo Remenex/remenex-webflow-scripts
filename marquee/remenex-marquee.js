@@ -51,12 +51,21 @@
     return prefersReduced ? mode : false;
   }
 
-  function duplicateSlides(container, duplicateCount) {
+  function duplicateSlides(container, duplicateCount, axis = 'x') {
     const originalHTML = container.innerHTML;
     let finalHTML = originalHTML;
 
+    const styles = window.getComputedStyle(container);
+    const gap = parseFloat(styles.gap) || 0;
+
+    const spacer = `<div remenex-spacer style="${
+      axis === 'y'
+        ? `height: ${gap}px;`
+        : `width: ${gap}px;`
+    } flex: 0 0 auto;"></div>`;
+
     for (let i = 0; i < duplicateCount; i++) {
-      finalHTML += originalHTML;
+      finalHTML += spacer + originalHTML;
     }
 
     container.innerHTML = finalHTML;
