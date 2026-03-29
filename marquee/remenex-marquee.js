@@ -53,8 +53,7 @@
 
  function duplicateSlides(container, duplicateCount, axis = 'x') {
     const originalSlides = Array.from(container.children);
-    const styles = window.getComputedStyle(container);
-    const gap = parseFloat(styles.gap) || 0;
+    const gap = getResponsiveGap(container.closest('[remenex-marquee]'), axis);
 
     if (!originalSlides.length) return '';
 
@@ -201,6 +200,30 @@
       cleanupFns
     });
   }
+
+  function getResponsiveGap(root, axis) {
+    const width = window.innerWidth;
+
+    const desktopGap = parseFloat(root.getAttribute('remenex-gap')) || 48;
+    const tabletGap = parseFloat(root.getAttribute('remenex-tablet-gap'));
+    const mobileGap = parseFloat(root.getAttribute('remenex-mobile-gap'));
+    const mobileHGap = parseFloat(root.getAttribute('remenex-mobile-h-gap'));
+
+    if (width <= 767) {
+      if (axis === 'y') {
+        return mobileGap ?? tabletGap ?? desktopGap;
+      } else {
+        return mobileHGap ?? mobileGap ?? tabletGap ?? desktopGap;
+      }
+    }
+
+    if (width <= 991) {
+      return tabletGap ?? desktopGap;
+    }
+
+    return desktopGap;
+  }
+
 
   function initAll() {
     document.querySelectorAll('[remenex-marquee]').forEach(initOne);

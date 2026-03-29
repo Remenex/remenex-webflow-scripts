@@ -38,7 +38,7 @@ You have **two options**.
 #### Option A — Use the hosted CSS file
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.5/marquee/remenex-marquee.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.6/marquee/remenex-marquee.css">
 ```
 
 #### Option B — Write the CSS manually
@@ -75,7 +75,7 @@ If you prefer not to load the hosted CSS file, use this:
 ### 3. Add Remenex Marquee JS
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.5/marquee/remenex-marquee.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.6/marquee/remenex-marquee.js"></script>
 ```
 
 ---
@@ -91,7 +91,7 @@ In Webflow, go to:
 Then add either:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.5/marquee/remenex-marquee.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.6/marquee/remenex-marquee.css">
 ```
 
 or your own manual CSS.
@@ -107,7 +107,7 @@ Then add:
 ```html
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.5/marquee/remenex-marquee.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Remenex/remenex-webflow-scripts@1.0.6/marquee/remenex-marquee.js"></script>
 ```
 
 You can also place these in **Page Settings** instead if you only want the marquee on a specific page.
@@ -174,6 +174,77 @@ All options are controlled through custom HTML attributes.
 | Attribute                | Type   | Default | Description          |
 | ------------------------ | ------ | ------- | -------------------- |
 | `remenex-reduced-motion` | string | `pause` | `pause` or `disable` |
+
+
+## 📱 Responsiveness
+
+Remenex Marquee supports responsive spacing through custom attributes, allowing you to control the gap between slides across different screen sizes.
+
+---
+
+### Breakpoints
+
+The following breakpoints are used:
+
+* **Desktop** → default (above 991px)
+* **Tablet** → ≤ 991px
+* **Mobile** → ≤ 767px
+
+---
+
+### Available Attributes
+
+| Attribute              | Description                     |
+| ---------------------- | ------------------------------- |
+| `remenex-gap`          | Default gap (desktop)           |
+| `remenex-tablet-gap`   | Gap on tablet screens           |
+| `remenex-mobile-gap`   | Gap on mobile (vertical axis)   |
+| `remenex-mobile-h-gap` | Gap on mobile (horizontal axis) |
+
+---
+
+### Example
+
+```html
+<div
+  remenex-marquee
+  remenex-gap="48"
+  remenex-tablet-gap="32"
+  remenex-mobile-gap="16"
+  remenex-mobile-h-gap="12"
+>
+```
+
+---
+
+### How It Works
+
+* The script automatically detects the current screen width
+* It selects the appropriate gap value based on breakpoints
+* Spacing is applied via inline styles (`margin-right` or `margin-bottom`)
+* No CSS media queries are required
+
+---
+
+### Fallback Behavior
+
+If a specific value is not provided:
+
+* Tablet falls back to `remenex-gap`
+* Mobile falls back to:
+
+  * `remenex-mobile-h-gap` → horizontal
+  * `remenex-mobile-gap` → vertical
+  * then `remenex-tablet-gap`
+  * then `remenex-gap`
+
+---
+
+### Notes
+
+* Works for both horizontal and vertical marquees
+* Ensures consistent spacing across duplicated slide sets
+* Fully controlled via attributes — no additional CSS needed
 
 ---
 

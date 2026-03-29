@@ -11,7 +11,7 @@
 
 [remenex-container] {
   display: flex;
-  gap: var(--remenex-gap, 48px);
+  flex-wrap: nowrap;
   will-change: transform;
 }
 
