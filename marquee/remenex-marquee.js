@@ -52,24 +52,34 @@
   }
 
   function duplicateSlides(container, duplicateCount, axis = 'x') {
-    const originalHTML = container.innerHTML;
-    let finalHTML = originalHTML;
-
+    const originalChildren = Array.from(container.children);
     const styles = window.getComputedStyle(container);
     const gap = parseFloat(styles.gap) || 0;
 
-    const spacer = `<div remenex-spacer style="${
-      axis === 'y'
-        ? `height: ${gap}px;`
-        : `width: ${gap}px;`
-    } flex: 0 0 auto;"></div>`;
+    container.innerHTML = '';
 
-    for (let i = 0; i < duplicateCount; i++) {
-      finalHTML += spacer + originalHTML + spacer;
+    for (let i = 0; i < duplicateCount + 1; i++) {
+      const group = document.createElement('div');
+      group.setAttribute('remenex-group', '');
+      group.style.display = 'flex';
+      group.style.flexDirection = axis === 'y' ? 'column' : 'row';
+      group.style.flex = '0 0 auto';
+      group.style.gap = `${gap}px`;
+
+      if (axis === 'y') {
+        group.style.marginBottom = `${gap}px`;
+      } else {
+        group.style.marginRight = `${gap}px`;
+      }
+
+      originalChildren.forEach((child) => {
+        group.appendChild(child.cloneNode(true));
+      });
+
+      container.appendChild(group);
     }
 
-    container.innerHTML = finalHTML;
-    return originalHTML;
+    return originalChildren.map((child) => child.outerHTML).join('');
   }
 
   function buildOptions(root) {
