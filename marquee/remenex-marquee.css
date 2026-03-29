@@ -1,0 +1,24 @@
+[remenex-marquee] {
+  overflow: hidden;
+  position: relative;
+}
+
+[remenex-viewport] {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+[remenex-container] {
+  display: flex;
+  gap: var(--remenex-gap, 48px);
+  will-change: transform;
+}
+
+[remenex-slide] {
+  flex: 0 0 auto;
+}
+
+[remenex-marquee][data-remenex-axis="y"] [remenex-container] {
+  flex-direction: column;
+}
