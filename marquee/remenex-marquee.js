@@ -59,7 +59,7 @@
 
     const originalHTML = container.innerHTML;
 
-    container.style.gap = '0px';
+    //container.style.gap = '0px';
 
     function applySpacing(slide) {
       if (axis === 'y') {
